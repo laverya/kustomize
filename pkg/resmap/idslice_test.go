@@ -31,10 +31,13 @@ func TestLess(t *testing.T) {
 		resource.NewResId(schema.GroupVersionKind{Kind: "Pod"}, "pod"),
 		resource.NewResId(schema.GroupVersionKind{Kind: "Namespace"}, "ns1"),
 		resource.NewResId(schema.GroupVersionKind{Kind: "Namespace"}, "ns2"),
+		resource.NewResIdWithPrefixNamespace(schema.GroupVersionKind{Kind: "RoleBinding", Group: "a", Version: "b"}, "rb", "", ""),
 		resource.NewResId(schema.GroupVersionKind{Kind: "Role"}, "ro"),
 		resource.NewResId(schema.GroupVersionKind{Kind: "RoleBinding"}, "rb"),
 		resource.NewResId(schema.GroupVersionKind{Kind: "CustomResourceDefinition"}, "crd"),
+		resource.NewResIdWithPrefixNamespace(schema.GroupVersionKind{Kind: "RoleBinding", Group: "c", Version: "a"}, "rb", "", ""),
 		resource.NewResId(schema.GroupVersionKind{Kind: "ServiceAccount"}, "sa"),
+		resource.NewResIdWithPrefixNamespace(schema.GroupVersionKind{Kind: "RoleBinding", Group: "a", Version: "c"}, "rb", "", ""),
 	}
 	expected := IdSlice{
 		resource.NewResId(schema.GroupVersionKind{Kind: "Namespace"}, "ns1"),
@@ -43,6 +46,9 @@ func TestLess(t *testing.T) {
 		resource.NewResId(schema.GroupVersionKind{Kind: "ServiceAccount"}, "sa"),
 		resource.NewResId(schema.GroupVersionKind{Kind: "Role"}, "ro"),
 		resource.NewResId(schema.GroupVersionKind{Kind: "RoleBinding"}, "rb"),
+		resource.NewResIdWithPrefixNamespace(schema.GroupVersionKind{Kind: "RoleBinding", Group: "a", Version: "b"}, "rb", "", ""),
+		resource.NewResIdWithPrefixNamespace(schema.GroupVersionKind{Kind: "RoleBinding", Group: "a", Version: "c"}, "rb", "", ""),
+		resource.NewResIdWithPrefixNamespace(schema.GroupVersionKind{Kind: "RoleBinding", Group: "c", Version: "a"}, "rb", "", ""),
 		resource.NewResId(schema.GroupVersionKind{Kind: "ConfigMap"}, "cm"),
 		resource.NewResId(schema.GroupVersionKind{Kind: "Pod"}, "pod"),
 	}
